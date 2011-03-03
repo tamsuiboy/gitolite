@@ -387,6 +387,8 @@ found in doc/wildcard-repositories.mkd.]
 This is a highly advanced topic; see [doc/virtualrefs-and-scoring.mkd][vs] for
 details.
 
+[vs]: http://sitaramc.github.com/gitolite/doc/virtualrefs-and-scoring.html
+
 <a name="_other_tips"></a>
 
 ### other tips
