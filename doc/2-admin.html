@@ -398,21 +398,12 @@ you could set your hooks to only work if a certain "gitconfig" variable was
 set.  Which means we now need a way to specify "git config" settings on a per
 repository basis.</p>
 
-<p>[Note: this feature is disabled by default.  Read the comments around a
-variable called <code>GL_GITCONFIG_KEYS</code> in the rc file, then set it to some
-appropriate value, to enable this feature.]</p>
-
 <p>Thanks to Teemu (teemu dot matilainen at iki dot fi), gitolite now does this
 very easily.  For security reasons, this can only be done from the master
 config file (i.e., if you're using delegation, the delegated admins cannot
 specify git config settings).</p>
 
-<p>Please see <code>doc/gitolite.conf.mkd</code> for syntax.  Note that this only supports the
-basic forms of the "git config" command:</p>
-
-<pre><code>git config              section.key value   # value may be an empty string
-git config --unset-all  section.key
-</code></pre>
-
-<p>It does not (currently) support other options like <code>--add</code>, the <code>value_regex</code>,
-etc.</p>
+<p>Please see <code>doc/gitolite.conf.mkd</code> for syntax and limitations.  Also note that
+this feature is disabled by default.  Read the comments on a variable called
+<code>GL_GITCONFIG_KEYS</code> in the rc file documentation, then set it to some
+appropriate value, to enable this feature.</p>
