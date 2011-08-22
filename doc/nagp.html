@@ -113,6 +113,14 @@ commit in a push for compliance and rejects the push (<em>all</em> the commits i
 the push, mind!) if it doesn't comply.  However, other than telling you
 how to get your hook to trigger, the actual code in that hook is out of
 scope for me.</p></li>
+<li><p>Jenkins integration</p>
+
+<p>I don't know much about CI systems, but I'm pretty sure they run off of
+some hook or other, but gitolite may already be using those hooks.  The
+section on hook chaining <a href="http://sitaramc.github.com/gitolite/doc/2-admin.html#_hook_chaining">here</a> shows you how to run your own hooks.</p>
+
+<p>In short, CI integration is no more a gitolite problem than any other
+purpose for which git's hooks can be used.</p></li>
 </ul>
 
 <p><a name="_windows"></a></p>
