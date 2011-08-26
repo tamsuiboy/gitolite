@@ -153,7 +153,7 @@ not have the <code>command=</code> part in the authorised keys file.</p>
 <code>SSH_ORIGINAL_COMMAND</code> variable to find out which repository you want to
 access, and whether you're reading or writing.</p>
 
-<p>Now is has user, repository, and access requested (read/write), gitolite looks
+<p>Now that it has a user, repository, and access requested (read/write), gitolite looks
 at its config file, and either allows or rejects the request.</p>
 
 <p>But this cannot differentiate between different branches within a repo; that
@@ -173,7 +173,7 @@ happen -- see <code>git help hooks</code> for details.  One of those hooks is th
 tag is about to be updated.  The hook is passed the name of the branch or tag,
 the old SHA1 value, and the new SHA1 value, as arguments.  Hooks that are
 called <em>before</em> an action happens are allowed to prevent that action from
-happening y returning an error code.</p>
+happening by returning an error code.</p>
 
 <p>When gitolite is told to create a new repository (by the admin), it installs
 a special update hook.  This hook takes all the information presented, looks

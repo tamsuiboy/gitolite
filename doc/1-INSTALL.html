@@ -17,15 +17,15 @@ http URLs, read <a href="http://sitaramc.github.com/gitolite/doc/http-backend.ht
 <p>In this document:</p>
 
 <ul>
-<li><a href="#_Impatient_to_install_">Impatient to install?</a>
+<li><a href="#_installing_and_upgrading_gitolite">installing and upgrading gitolite</a>
 <ul>
 <li><a href="#_side_note_upgrading">(side note) upgrading</a></li>
 <li><a href="#_package_method">package method</a></li>
-<li><a href="#_root_method">root method</a></li>
 <li><a href="#_non_root_method">non-root method</a>
 <ul>
 <li><a href="#_upgrading_from_from_client_method_to_non_root_method">upgrading from from-client method to non-root method</a></li>
 </ul></li>
+<li><a href="#_root_method">root method</a></li>
 </ul></li>
 <li><a href="#_troubleshooting">troubleshooting</a></li>
 <li><a href="#_important_points_to_note">important points to note</a></li>
@@ -52,42 +52,29 @@ http URLs, read <a href="http://sitaramc.github.com/gitolite/doc/http-backend.ht
 
 <hr />
 
-<p><a name="_Impatient_to_install_"></a></p>
+<p><a name="_installing_and_upgrading_gitolite"></a></p>
 
-<h3>Impatient to install?</h3>
+<h3>installing and upgrading gitolite</h3>
 
-<p>This top section is for the impatient.  You might qualify if you can
-understand the following:</p>
-
-<blockquote>
-  <hr />
+<p>This section tells you how to install/upgrade gitolite, without too much
+background.  Later sections have more details and troubleshooting info; please
+read them before asking for help if you have problems.</p>
 
 <p>A bare minimum gitolite setup has:</p>
 
 <ul>
 <li>a server</li>
-<li>a "hosting user" on the server (a real Unix userid; we use "git" in
-this document, although RPM/DEB installs use "gitolite")</li>
+<li>a "hosting user" on the server (a real Unix userid; we use "git" in this
+document, although RPM/DEB installs use "gitolite")</li>
 <li>a virtual "admin user" -- the user who sets up gitolite and configures it</li>
 <li>the admin user's client or workstation, from which he does all his work</li>
 </ul>
 
-<hr />
-</blockquote>
-
-<p>If you didn't get all that, or thought you did then ran into problems,
-beg/borrow some patience and read the rest of this document before trying it
-again.</p>
-
-<p>Gitolite allows 3 methods of install:</p>
-
-<ul>
-<li><strong>package method</strong> if you have a gitolite RPM or a DEB available</li>
-<li><strong>root method</strong> if you have root access to the server, and you plan to
-have multiple "hosting users" on it</li>
-<li><strong>non-root method</strong> if you don't have root access to the server, but you
-do have at least one account with a password</li>
-</ul>
+<p>Gitolite allows 3 methods of install.  The two most common are (1) the
+<strong>package method</strong>, used if you have a gitolite RPM or a DEB available, and
+(2) the <strong>non-root method</strong> which is the preferred manual install mode.  Less
+commonly used is (3) the <strong>root method</strong>, which is useful if you plan to have
+multiple "hosting users" on the same server.</p>
 
 <p>These install methods are described in detail below.  (<em>Once you finish the
 install, read the <a href="http://sitaramc.github.com/gitolite/doc/2-admin.html">admin document</a> to administer your gitolite
@@ -108,8 +95,9 @@ filename as an argument.</p>
 
 <h4>package method</h4>
 
-<p>(Unlike the rest of this document, this specific method uses "gitolite" as the
-"hosting user" instead of "git", because that is what the RPM/DEB creates).</p>
+<p>(Unlike in the rest of this document, we use "gitolite" as the "hosting user"
+instead of "git" here, because that is the user that both the Fedora and
+Debian packages create.  Your distro/OS may vary.)</p>
 
 <p>On your <em>workstation</em>:</p>
 
@@ -134,49 +122,14 @@ gl-setup /tmp/YourName.pub
 <pre><code>git clone gitolite@server:gitolite-admin
 </code></pre>
 
-<p><a name="_root_method"></a></p>
-
-<h4>root method</h4>
-
-<p>On your <em>workstation</em>:</p>
-
-<ul>
-<li>copy your <code>~/.ssh/id_rsa.pub</code> file to <code>/tmp/YourName.pub</code> on the server</li>
-</ul>
-
-<p>On your <em>server</em>, as <em>root</em>:</p>
-
-<pre><code>git clone git://github.com/sitaramc/gitolite
-cd gitolite
-src/gl-system-install
-# defaults to being the same as:
-# src/gl-system-install /usr/local/bin /usr/local/share/gitolite/conf /usr/local/share/gitolite/hooks
-
-# to upgrade gitolite, repeat the above commands.  Make sure you use the
-# same arguments for the last command each time.
-
-# now create your "hosting user" ('git' in our examples) using whatever
-# command your distro expects you to use
-
-# switch to the hosting user
-su - git
-
-# (now as git)
-gl-setup /tmp/YourName.pub
-</code></pre>
-
-<p>On your <em>workstation</em>:</p>
-
-<pre><code>git clone git@server:gitolite-admin
-</code></pre>
-
 <p><a name="_non_root_method"></a></p>
 
 <h4>non-root method</h4>
 
 <p><strong>IMPORTANT WARNING -- IGNORE AT YOUR PERIL</strong>: if you want to use this method
-you had better know the password to the hosting user on the server, just in
-case you manage to lock yourself out by messing with the keys.</p>
+you had better know the password to the hosting user on the server, or be able
+to <code>su</code> to it from root, just in case you manage to lock yourself out by
+messing with the keys.</p>
 
 <p><strong>NOTE</strong>: This method is exhaustively described in the <a href="http://sites.google.com/site/senawario/home/gitolite-tutorial">tutorial</a>, if
 you're interested.  (That tutorial is by someone else but it's nice enough for
@@ -240,6 +193,42 @@ $GL_PACKAGE_HOOKS = '/home/git/share/gitolite/hooks';
 
 <p>Now save the file.</p></li>
 </ul>
+
+<p><a name="_root_method"></a></p>
+
+<h4>root method</h4>
+
+<p>On your <em>workstation</em>:</p>
+
+<ul>
+<li>copy your <code>~/.ssh/id_rsa.pub</code> file to <code>/tmp/YourName.pub</code> on the server</li>
+</ul>
+
+<p>On your <em>server</em>, as <em>root</em>:</p>
+
+<pre><code>git clone git://github.com/sitaramc/gitolite
+cd gitolite
+src/gl-system-install
+# defaults to being the same as:
+# src/gl-system-install /usr/local/bin /usr/local/share/gitolite/conf /usr/local/share/gitolite/hooks
+
+# to upgrade gitolite, repeat the above commands.  Make sure you use the
+# same arguments for the last command each time.
+
+# now create your "hosting user" ('git' in our examples) using whatever
+# command your distro expects you to use
+
+# switch to the hosting user
+su - git
+
+# (now as git)
+gl-setup /tmp/YourName.pub
+</code></pre>
+
+<p>On your <em>workstation</em>:</p>
+
+<pre><code>git clone git@server:gitolite-admin
+</code></pre>
 
 <hr />
 

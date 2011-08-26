@@ -537,14 +537,7 @@ configuration information that is specific to each repo, you could do this:</p>
 
 <p>This does either a plain "git config section.key value" (for the first 3
 examples above) or "git config --unset-all section.key" (for the last
-example).</p>
-
-<p><strong>WARNING</strong>: deleting the config line from the <code>conf/gitolite.conf</code> file will
-<em>not</em> delete the variable from <code>repo.git/config</code>.  The syntax in the last
-example is the <em>only</em> way to make gitolite execute a <code>--unset-all</code> operation
-on the given key.</p>
-
-<p>Other forms (--add, the <code>value_regex</code>, etc) are not supported.</p>
+example).  Other forms (--add, the <code>value_regex</code>, etc) are not supported.</p>
 
 <p><strong>Note</strong>: this won't work unless the rc file has the right settings; please
 see comments around the variable <code>$GL_GITCONFIG_KEYS</code> in doc/gitolite.rc.mkd

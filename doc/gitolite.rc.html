@@ -163,6 +163,11 @@ with regular expressions) is to allow anything and everything:
 able to look at, a literal "." needs to be specified in this string as
 <code>\\.</code> (two backslashes and a dot).  So this is how you'd allow any keys in
 the "foo" category: <code>$GL_GITCONFIG_KEYS = "foo\\..*";</code></p></li>
+<li><p><code>$GL_GITCONFIG_WILD</code>, boolean, default 0</p>
+
+<p>This setting allows gitconfig keys even for wild repos.  This is an
+efficiency issue more than a security issue, since this requires trawling
+through all of <code>$REPO_BASE</code> looking for stuff :)</p></li>
 <li><p><code>$GL_NO_CREATE_REPOS</code>, boolean, default 0</p>
 
 <p>DO NOT CHANGE THIS unless you have other means to create repos and
